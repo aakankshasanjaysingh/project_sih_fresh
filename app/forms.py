@@ -1,9 +1,8 @@
 # akasih/forms.py
 from django import forms
+from .models import Request
 
 class RequestForm(forms.ModelForm):
-    title = forms.CharField(max_length=100)
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows':5,'cols':40}))
-    pdf = forms.FileField()
-    agency_name = forms.CharField(max_length=100)
-    
+    class Meta:
+        model = Request
+        fields = ['title', 'agency_name', 'description', 'pdf']
