@@ -3,7 +3,7 @@ from django.db import models
 
 class Request(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField(max_length=100)
+    description = models.TextField(max_length=300)
     pdf = models.FileField(upload_to='pdfs/')  # PDF file upload
     agency_name = models.CharField(max_length=100)
 
