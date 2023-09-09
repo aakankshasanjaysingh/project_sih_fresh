@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from .forms import RequestForm
 
 def create_request(request):
@@ -6,7 +6,9 @@ def create_request(request):
         form = RequestForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('success')  # You can specify a success URL
+            print()
+            #return HttpResponse(str(form.cleaned_data['title']))
+            #return redirect('success')  # You can specify a success URL
     else:
         form = RequestForm()
     return render(request, 'request_form.html', {'form': form})
