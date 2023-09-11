@@ -1,6 +1,121 @@
-<!-- akasih/templates/akasih/request_form.html -->
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Form</title>
+    <style>
+        /* Custom CSS for centering the container */
+        ::-webkit-file-upload-button {
+            display: none;
+        }
+        
+        .custom-container {
+            max-width: 600px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+        
+        .btn {
+            margin-top: 30px;
+            width: 250px;
+            border-radius: 20px;
+            height: 50px;
+            font-weight: 600;
+            font-size: 20px;
+            flex-shrink: 0;
+            background: #517CD7 !important;
+        }
+        
+        body {
+            background-color: #edf2f6;
+        }
+        
+        .help-block {
+            color: #F54913;
+            font-family: Noto Sans;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 400;
+            margin-top: 3px;
+            line-height: 18px; /* 150% */
+        }
+        
+        .label {
+            font-weight: 600 !important;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .btn {
+                width: 200px; /* Full width on small screens */
+            }
+        }
+        @media (max-width: 375px) {
+            .btn {
+                width: 150px; /* Full width on small screens */
+            }
+        }
+        @media (max-width: 200px) {
+            .btn {
+                width: 100px; /* Full width on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-container"> <!-- Add the custom-container class here -->
+        <form method="POST" enctype="multipart/form-data">
+            <div id="form-part">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.title.id }}" class="label">{{ form.title.label }}</label>
+                <div class="input"> {{ form.title }}</div>
+                <div class="help-block">* mandatory section *</div>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.agency_name.id }}" class="label">{{ form.agency_name.label }}</label>
+                <div class="input">{{ form.agency_name }}</div>
+                <div class="help-block">* mandatory section *</div>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.pdf.id }}" class="label" style="font-size: 12px;">{{ form.pdf.label }}</label>
+                <div class="input">{{ form.pdf }}</div>
+            </div>
+            <div class="text-center"> 
+                <button type="button" class="btn btn-primary" id="next-button">Next</button>
+            </div>
+            </div>
+            <div id="hide-part" style="display: none;">
+                <div class="form-group">
+                    <label for="{{ form.video_name.id }}" class="label">{{ form.video_name.label }}</label>
+                    {{ form.video_name }}
+                    <div class="help-block">* mandatory section *</div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.description.id }}" class="label">{{ form.description.label }}</label>
+                    {{ form.description }}
+                    <div class="help-block">* mandatory section *</div>
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+        <script>
+            document.getElementById("next-button").addEventListener("click", function () {
+                document.getElementById("form-part").style.display = "none";
+                document.getElementById("hide-part").style.display = "block";
+            });
+        </script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
